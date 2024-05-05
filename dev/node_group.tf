@@ -30,7 +30,7 @@ resource "aws_iam_role_policy_attachment" "dev_nodegroup1_AmazonEKS_CNI_Policy" 
   role       = aws_iam_role.dev_nodegroup1_role.name
 }
 
-resource "aws_iam_role_poicy_attachment" "dev_nodegroup1_AmazonEC2ContainerRegistryReadOnly" {
+resource "aws_iam_role_policy_attachment" "dev_nodegroup1_AmazonEC2ContainerRegistryReadOnly" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
   role       = aws_iam_role.dev_nodegroup1_role.name
 }
@@ -41,8 +41,7 @@ resource "aws_eks_node_group" "dev_nodegroup1" {
   node_group_name = "dev_nodegroup1"
   node_role_arn   = aws_iam_role.dev_nodegroup1_role.arn
   subnet_ids = [
-    aws_subnet.dev_public.id,
-    aws_subnet.dev_private.id
+    aws_subnet.dev_public.id
   ]
 
   instance_types = ["t2.medium"]
@@ -57,6 +56,6 @@ resource "aws_eks_node_group" "dev_nodegroup1" {
     aws_eks_cluster.dev_cluster,
     aws_iam_role_policy_attachment.dev_nodegroup1_AmazonEKSWorkerNodePolicy,
     aws_iam_role_policy_attachment.dev_nodegroup1_AmazonEKS_CNI_Policy,
-    aws_iam_role_poicy_attachment.dev_nodegroup1_AmazonEC2ContainerRegistryReadOnly,
+    aws_iam_role_policy_attachment.dev_nodegroup1_AmazonEC2ContainerRegistryReadOnly,
   ]
 }

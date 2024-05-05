@@ -9,7 +9,7 @@ resource "aws_internet_gateway" "cloudgroup_igw" {
   vpc_id = aws_vpc.cloudgroup.id
 
   tags = {
-    Name = cloudgroup_igw
+    Name = "cloudgroup_igw"
   }
 }
 
@@ -29,7 +29,7 @@ resource "aws_subnet" "dev_public" {
 resource "aws_subnet" "dev_private" {
   vpc_id            = aws_vpc.cloudgroup.id
   cidr_block        = "10.0.64.0/18"
-  availability_zone = "ap-southeast-1a"
+  availability_zone = "ap-southeast-1b"
 
   tags = {
     Name                                = "dev_private_subnet"
